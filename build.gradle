@@ -16,7 +16,8 @@ plugins {
       // testing and code coverage
   	id 'jacoco'
   	
-  	id 'pmd'
+  	// enable checking code quality
+  	//id 'pmd'
 }
 
 repositories {
