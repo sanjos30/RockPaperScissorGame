@@ -51,7 +51,7 @@ OR
 4. docker run
    >docker run -it hirer-coding-challenge
 5. Alternatively, run docker build & run in one command
-   >docker build . -t rock-paper-scissor-game && docker run -it hirer-coding-challenge
+   >docker build . -t rock-paper-scissor-game && docker run -it rock-paper-scissor-game
 
 
 ### Run without Docker (Need Java & Gradle) 

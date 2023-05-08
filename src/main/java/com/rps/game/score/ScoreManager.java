@@ -93,7 +93,7 @@ public class ScoreManager {
 		System.out.format(ANSI_CYAN + "%40s\n", "TOURNAMENT SCORE SUMMARY" + ANSI_RESET);
 		printSeparator();
 
-		System.out.format(ANSI_CYAN + "%10s%10s\n", "WON: ", getWinner() == null ? "No Winner" : getWinner() + ANSI_RESET);
+		System.out.format(ANSI_GREEN + "%10s%10s\n", "WON: ", getWinner() == null ? "No Winner" : getWinner() + ANSI_RESET);
 
 		printSeparator();
 		System.out.println();
@@ -131,12 +131,12 @@ public class ScoreManager {
 		printSeparator();
 		System.out.format(ANSI_BLUE + "%40s\n", "TOURNAMENT GAMES SCORE" + ANSI_RESET);
 		printSeparator();
-		System.out.format(FORMATTED_STRING_WITH_LINE_BREAK, "GAME", "WINNER", "HUMAN-MOVE", "COMPUTER-MOVE");
+		System.out.format(ANSI_BLUE + FORMATTED_STRING_WITH_LINE_BREAK, "GAME", "WINNER", "HUMAN-MOVE", "COMPUTER-MOVE" + ANSI_RESET);
 
 		for (int i = 0; i < tournamentGames.length; i++) {
 			Game game = tournamentGames[i];
-			System.out.format(FORMATTED_STRING_WITH_LINE_BREAK, i + 1, game.getWinner() == null ? "No Winner" : getWinner(),
-					game.getPlayerOneMove(), game.getPlayerTwoMove());
+			System.out.format(ANSI_BLUE + FORMATTED_STRING_WITH_LINE_BREAK, i + 1, game.getWinner() == null ? "No Winner" : getWinner(),
+					game.getPlayerOneMove(), game.getPlayerTwoMove() + ANSI_RESET);
 
 		}
 		printSeparator();
