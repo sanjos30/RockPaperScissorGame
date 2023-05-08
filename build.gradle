@@ -8,11 +8,6 @@ plugins {
   	
   	// enable checking code quality
   	id 'pmd'
-
-    id 'com.github.ben-manes.versions' version '0.39.0'
-    id 'com.github.actions.toolkit' version '0.2.0'
-    id 'com.github.benjamineckstein.github-actions' version '0.0.5'
-
 }
 
 repositories {
@@ -55,12 +50,6 @@ run {
 test {
     useJUnitPlatform()
     finalizedBy 'jacocoTestReport'
-
-    afterSuite { desc, result ->
-        if (!desc.parent) { // will match the outermost suite
-            githubActions.publishJUnitResults(result)
-        }
-    }
 }
 
 jacocoTestReport {
