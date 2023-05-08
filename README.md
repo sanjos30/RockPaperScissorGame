@@ -28,12 +28,13 @@ The program also simulates the opponent and makes appropriate moves.
 
 The program can be run using Docker or standalone Java/Gradle.
 
-Docker 20 or above
+>Docker 20 or above
 
 OR
 
-Gradle 6.3 or above, 
-Java 1.8 or above
+> Gradle 6.3 or above, 
+>
+> Java 1.8 or above
 
 
 # Setup Instructions
