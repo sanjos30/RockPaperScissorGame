@@ -43,22 +43,22 @@ OR
 ### Run with Docker
 
 1.  Clone the project to a local workspace directory
-    >git clone https://github.com/sanjos30/hirer-coding-challenge.git
+    >git clone https://github.com/sanjos30/RockPaperScissorGame.git
 2.  cd to the working directory
-    >cd hirer-coding-challenge
+    >cd RockPaperScissorGame
 3.  docker build
-    >docker build . -t hirer-coding-challenge
+    >docker build . -t rock-paper-scissor-game
 4. docker run
    >docker run -it hirer-coding-challenge
 5. Alternatively, run docker build & run in one command
-   >docker build . -t hirer-coding-challenge && docker run -it hirer-coding-challenge
+   >docker build . -t rock-paper-scissor-game && docker run -it hirer-coding-challenge
 
 
 ### Run without Docker (Need Java & Gradle) 
 1.  Clone the project to a local workspace directory
-    >git clone https://github.com/sanjos30/hirer-coding-challenge.git
+    >git clone https://github.com/sanjos30/RockPaperScissorGame.git
 2.  cd to the working directory
-    >cd hirer-coding-challenge
+    >cd RockPaperScissorGame
 3.  gradle clean build
     >gradle clean build
 4.  gradle run
