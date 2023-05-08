@@ -1,12 +1,12 @@
 package com.rps.game.exception;
 
 
-public class RpsGameException extends Exception{
+public class RpsGameException extends Exception {
 
 	private static final long serialVersionUID = 1L;
-	
-	private transient String errorMessage;
-	
+
+	private final transient String errorMessage;
+
 	public RpsGameException(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
@@ -14,5 +14,5 @@ public class RpsGameException extends Exception{
 	public String getErrorMessage() {
 		return this.errorMessage;
 	}
-	
+
 }

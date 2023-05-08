@@ -5,10 +5,10 @@ import com.rps.game.players.PlayerType;
 
 public interface Game {
 
-	PlayerType getWinner();
+    PlayerType getWinner();
 
-	GameItem getPlayerOneMove();
-	
-	GameItem getPlayerTwoMove();
-	
+    GameItem getPlayerOneMove();
+
+    GameItem getPlayerTwoMove();
+
 }

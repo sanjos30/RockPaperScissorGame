@@ -2,7 +2,7 @@ package com.rps.game.moves;
 
 import com.rps.game.outcome.GameOutcome;
 
-public class Rock implements GameItem{
+public class Rock implements GameItem {
 
 	public GameOutcome compete(GameItem it) {
 		return it.eval(this);
@@ -24,5 +24,5 @@ public class Rock implements GameItem{
 		return "Rock";
 	}
 
-	
+
 }

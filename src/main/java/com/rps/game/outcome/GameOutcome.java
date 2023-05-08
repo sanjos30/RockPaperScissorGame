@@ -4,14 +4,9 @@ import java.util.Objects;
 
 public class GameOutcome {
 
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
-	}
-
+	public final static GameOutcome WIN = new GameOutcome(0, "WIN");
+	public final static GameOutcome LOSE = new GameOutcome(1, "LOSE");
+	public final static GameOutcome DRAW = new GameOutcome(2, "DRAW");
 	private int code;
 	private String name;
 
@@ -20,9 +15,13 @@ public class GameOutcome {
 		name = nm;
 	}
 
-	public final static GameOutcome WIN = new GameOutcome(0, "WIN");
-	public final static GameOutcome LOSE = new GameOutcome(1, "LOSE");
-	public final static GameOutcome DRAW = new GameOutcome(2, "DRAW");
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
 
 	@Override
 	public boolean equals(Object o) {
