@@ -4,11 +4,11 @@ import com.rps.game.score.ScoreManager;
 
 public class Tournament {
 
-	int numberOfGames;
+	transient int numberOfGames;
 
 	Game[] tournamentGames;
 
-	ScoreManager scoreManager;
+	transient ScoreManager scoreManager;
 
 	public Tournament(int numberOfGames) {
 		this.numberOfGames = numberOfGames;

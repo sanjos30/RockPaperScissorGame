@@ -21,10 +21,5 @@ public class TestConstants {
 		mockPlayerScore.put(2, numberOfDraw);
 		return mockPlayerScore;
 	}
-	
-	public static Game[] getMockGames(int count) {
-		
-		return null;
-	}
 
 }

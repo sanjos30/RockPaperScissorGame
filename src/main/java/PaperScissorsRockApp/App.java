@@ -17,106 +17,112 @@ import com.rps.game.outcome.GameOutcome;
 import com.rps.game.score.ScoreManager;
 import com.rps.game.services.HelperService;
 
+import static com.rps.game.constants.Constants.*;
+
 public class App {
 
 	private static final int formatted_output_alignment = 35;
 	private static HelperService helper = new HelperService();
 
 	public static void main(String[] args) {
+		Scanner scanner = null;
+		try {
+			// scanner to read user input
+			scanner = new Scanner(System.in);
+			System.out.println(ANSI_BLUE + Constants.USER_STEP_1 + ANSI_RESET);
+			int numberOfGames = -1;
 
-		// scanner to read user input
-		Scanner scanner = new Scanner(System.in);
-		System.out.println(Constants.USER_STEP_1);
-		int numberOfGames = -1;
-		
-		// to ensure a valid number is entered
-		while(numberOfGames<0) {
-			try {
-			numberOfGames = scanner.nextInt();
-			} catch (InputMismatchException inputMismatchException) {
-				System.out.println(Constants.USER_ERROR_MESSAGE_INVALID_INPUT);
-				scanner.nextLine();
-			}
-		}
-		Tournament tournament = new Tournament(numberOfGames);
-		Game[] tournamentGames = new Game[numberOfGames];
-		ScoreManager scoreManager = tournament.getScoreManager();
-		int curGameCount = 1;
-
-		printSeparator();
-		System.out.println(Constants.USER_STEP_2_TOURNAMENT_BEGINS);
-		printSeparator();
-
-		Game humanComputerGame;
-		while (curGameCount <= numberOfGames) {
-
-			System.out.println("Game " + curGameCount + " of " + numberOfGames);
-			System.out.println();
-			System.out.println("Press 0 to select a ROCK"); // 0 is the handGestureCode for Rock - these codes can be
-															// integrated with an image parser
-			System.out.println("Press 1 to select a PAPER"); // 1 is the handGestureCode for Rock
-			System.out.println("Press 2 to select a SCISSOR"); // 2 is the handGestureCode for Rock
-
-			System.out.println("Press 9 to quit the tournament.");
-
-			int humanPlayerHandGestureCode = -1; // init to an invalid code
-			
-			try {
-				humanPlayerHandGestureCode = scanner.nextInt();
-			} catch (InputMismatchException inputMismatchException) {
-				System.out.println(Constants.USER_ERROR_MESSAGE_INVALID_HAND_GESTURE);
-				scanner.nextLine();
-			}
-
-			if (humanPlayerHandGestureCode > 2) {
-				if (humanPlayerHandGestureCode > 9 || humanPlayerHandGestureCode < 9) {
-					System.out.println(Constants.USER_ERROR_MESSAGE_INVALID_HAND_GESTURE);
-					continue;
-				} else {
-					System.exit(1); // exit on 9
+			// to ensure a valid number is entered
+			while (numberOfGames < 0) {
+				try {
+					numberOfGames = scanner.nextInt();
+				} catch (InputMismatchException inputMismatchException) {
+					System.out.println(ANSI_RED + Constants.USER_ERROR_MESSAGE_INVALID_INPUT + ANSI_RESET);
+					scanner.nextLine();
 				}
 			}
+			Tournament tournament = new Tournament(numberOfGames);
+			Game[] tournamentGames = new Game[numberOfGames];
+			ScoreManager scoreManager = tournament.getScoreManager();
+			int curGameCount = 1;
 
-			GameItem computerMoveGameItem = null, humanMoveGameItem = null;
-			try {
-				// map human hand gesture to a game item
-				humanMoveGameItem = helper.getGameItem(humanPlayerHandGestureCode);
-
-				// generate a random GameItem for computer move
-				computerMoveGameItem = helper.getRandomGameItem();
-			} catch (RpsGameException e) {
-				System.out.println(Constants.RUNTIME_ERROR_MESSAGE_GENERIC + e.getErrorMessage());
-				System.exit(1);
-			}
-			// We are comparing human player's move with computer
-			// hence, the outcome depicts the status of human's move victory/loss/draw
-			GameOutcome humanPlayerGameOutcome = humanMoveGameItem.compete(computerMoveGameItem);
-
-			humanComputerGame = new HumanComputerGame(helper.getWinner(humanPlayerGameOutcome), humanMoveGameItem,
-					computerMoveGameItem);
-			tournamentGames[curGameCount - 1] = humanComputerGame;
-			
-			scoreManager.updateScore(humanPlayerGameOutcome);
-
-			displayCurrentGameWinner(humanComputerGame, curGameCount);
 			printSeparator();
-			curGameCount++;
+			System.out.println(ANSI_YELLOW + Constants.USER_STEP_2_TOURNAMENT_BEGINS + ANSI_RESET);
+			printSeparator();
 
+			Game humanComputerGame;
+			while (curGameCount <= numberOfGames) {
+
+				System.out.println(ANSI_YELLOW + "Game " + curGameCount + " of " + numberOfGames + ANSI_RESET);
+				System.out.println();
+				System.out.println(ANSI_BLUE + "Press 0 to select a ROCK" + ANSI_RESET); // 0 is the handGestureCode for Rock - these codes can be
+				// integrated with an image parser
+				System.out.println(ANSI_BLUE +"Press 1 to select a PAPER"+ ANSI_RESET); // 1 is the handGestureCode for Rock
+				System.out.println(ANSI_BLUE + "Press 2 to select a SCISSOR"+ ANSI_RESET); // 2 is the handGestureCode for Rock
+
+				System.out.println(ANSI_BLUE +"Press 9 to quit the tournament."+ ANSI_RESET);
+
+				int humanPlayerHandGestureCode = -1; // init to an invalid code
+
+				try {
+					humanPlayerHandGestureCode = scanner.nextInt();
+				} catch (InputMismatchException inputMismatchException) {
+					System.out.println(ANSI_RED + Constants.USER_ERROR_MESSAGE_INVALID_HAND_GESTURE + ANSI_RESET);
+					scanner.nextLine();
+				}
+
+				if (humanPlayerHandGestureCode > MINIMUM_VALID_INPUT_CODE) {
+					if (humanPlayerHandGestureCode == USER_GAME_EXIT_CODE) {
+						System.exit(1); // exit on 9
+					} else {
+						System.out.println(ANSI_RED + Constants.USER_ERROR_MESSAGE_INVALID_HAND_GESTURE + ANSI_RESET);
+						continue;
+					}
+				}
+
+				GameItem computerMoveGameItem = null, humanMoveGameItem = null;
+				try {
+					// map human hand gesture to a game item
+					humanMoveGameItem = helper.getGameItem(humanPlayerHandGestureCode);
+
+					// generate a random GameItem for computer move
+					computerMoveGameItem = helper.getRandomGameItem();
+				} catch (RpsGameException e) {
+					System.out.println(ANSI_RED + Constants.RUNTIME_ERROR_MESSAGE_GENERIC + e.getErrorMessage()+ ANSI_RESET);
+					System.exit(1);
+				}
+				// We are comparing human player's move with computer
+				// hence, the outcome depicts the status of human's move victory/loss/draw
+				GameOutcome humanPlayerGameOutcome = humanMoveGameItem.compete(computerMoveGameItem);
+
+				humanComputerGame = new HumanComputerGame(helper.getWinner(humanPlayerGameOutcome), humanMoveGameItem,
+						computerMoveGameItem);
+				tournamentGames[curGameCount - 1] = humanComputerGame;
+
+				scoreManager.updateScore(humanPlayerGameOutcome);
+
+				displayCurrentGameWinner(humanComputerGame, curGameCount);
+				printSeparator();
+				curGameCount++;
+
+			}
+
+			scoreManager.displayTournamentScoreSummary();
+
+			scoreManager.displayPlayersScore();
+
+			scoreManager.displayAllGamesScore(tournamentGames);
+
+
+		}finally {
+			scanner.close();
 		}
-		
-		scoreManager.displayTournamentScoreSummary();
-
-		scoreManager.displayPlayersScore();
-
-		scoreManager.displayAllGamesScore(tournamentGames);
-
-		scanner.close();
 	}
 
 	private static void displayCurrentGameWinner(Game game, int curGameCount) {
 
-		System.out.format("%-15s%-15s%-15s%-15s\n", "Game", "Winner", "HumanMove", "ComputerMove");
-		System.out.format("%-15s%-15s%-15s%-15s\n",curGameCount, game.getWinner()==null?"No Winner": game.getWinner() , game.getPlayerOneMove() , game.getPlayerTwoMove() );
+		System.out.format(ANSI_GREEN + "%-15s%-15s%-15s%-15s\n", "Game", "Winner", "HumanMove", "ComputerMove" + ANSI_RESET);
+		System.out.format(ANSI_GREEN + "%-15s%-15s%-15s%-15s\n",curGameCount, game.getWinner()==null?"No Winner": game.getWinner() , game.getPlayerOneMove() , game.getPlayerTwoMove() + ANSI_RESET);
 		
 	}
 

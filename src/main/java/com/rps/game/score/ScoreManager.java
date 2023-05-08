@@ -8,6 +8,8 @@ import com.rps.game.Game;
 import com.rps.game.outcome.GameOutcome;
 import com.rps.game.players.PlayerType;
 
+import static com.rps.game.constants.Constants.*;
+
 public class ScoreManager {
 
 	public Map<Integer, Integer> getHumanScore() {
@@ -78,7 +80,7 @@ public class ScoreManager {
 
 		if (humanScore.get(0) > computerScore.get(0)) {
 			return PlayerType.HUMAN;
-		} else if (humanScore.get(0) == computerScore.get(0)) {
+		} else if (humanScore.get(0).equals(computerScore.get(0))) {
 			return null;
 		} else {
 			return PlayerType.COMPUTER;
@@ -88,10 +90,10 @@ public class ScoreManager {
 
 	public void displayTournamentScoreSummary() {
 		printSeparator();
-		System.out.format("%40s\n", "TOURNAMENT SCORE SUMMARY");
+		System.out.format(ANSI_CYAN + "%40s\n", "TOURNAMENT SCORE SUMMARY" + ANSI_RESET);
 		printSeparator();
 
-		System.out.format("%10s%10s\n", "WON: ", getWinner() == null ? "No Winner" : getWinner());
+		System.out.format(ANSI_CYAN + "%10s%10s\n", "WON: ", getWinner() == null ? "No Winner" : getWinner() + ANSI_RESET);
 
 		printSeparator();
 		System.out.println();
@@ -99,25 +101,25 @@ public class ScoreManager {
 
 	public void displayPlayersScore() {
 		printSeparator();
-		System.out.format("%40s\n", "TOURNAMENT PLAYERS SCORE");
+		System.out.format(ANSI_CYAN + "%40s\n", "TOURNAMENT PLAYERS SCORE" + ANSI_RESET);
 		printSeparator();
 
-		System.out.format("%-15s%-15s%-15s%-15s\n", "PLAYER", "WINS", "LOSE", "DRAW");
+		System.out.format(ANSI_CYAN + FORMATTED_STRING_WITH_LINE_BREAK, "PLAYER", "WINS", "LOSE", "DRAW" + ANSI_RESET);
 
-		System.out.format("%-15s%-15s%-15s%-15s\n", PlayerType.HUMAN, humanScore.get(0), humanScore.getOrDefault(1, 0),
-				humanScore.get(2));
+		System.out.format(ANSI_CYAN +FORMATTED_STRING_WITH_LINE_BREAK, PlayerType.HUMAN, humanScore.get(0), humanScore.getOrDefault(1, 0),
+				humanScore.get(2) + ANSI_RESET);
 
-		System.out.format("%-15s%-15s%-15s%-15s\n", PlayerType.COMPUTER, computerScore.get(0),
-				computerScore.getOrDefault(1, 0), computerScore.get(2));
+		System.out.format(ANSI_CYAN +FORMATTED_STRING_WITH_LINE_BREAK, PlayerType.COMPUTER, computerScore.get(0),
+				computerScore.getOrDefault(1, 0), computerScore.get(2) + ANSI_RESET);
 
 		printSeparator();
 		System.out.println();
 	}
 
 	public int getOppositeGameOutcomeName(int currentGameOutcomeCode) {
-		if (currentGameOutcomeCode == 0) {
+		if (currentGameOutcomeCode == ZERO) {
 			return 1;
-		} else if (currentGameOutcomeCode == 1) {
+		} else if (currentGameOutcomeCode == ONE) {
 			return 0;
 		} else {
 			return 2; // draw
@@ -127,18 +129,13 @@ public class ScoreManager {
 	public void displayAllGamesScore(Game[] tournamentGames) {
 
 		printSeparator();
-		System.out.format("%40s\n", "TOURNAMENT GAMES SCORE");
+		System.out.format(ANSI_BLUE + "%40s\n", "TOURNAMENT GAMES SCORE" + ANSI_RESET);
 		printSeparator();
-		// System.out.println(" GAME# | WINNER | HUMAN-MOVE | COMPUTER-MOVE |");
-		System.out.format("%-15s%-15s%-15s%-15s\n", "GAME", "WINNER", "HUMAN-MOVE", "COMPUTER-MOVE");
+		System.out.format(FORMATTED_STRING_WITH_LINE_BREAK, "GAME", "WINNER", "HUMAN-MOVE", "COMPUTER-MOVE");
 
 		for (int i = 0; i < tournamentGames.length; i++) {
 			Game game = tournamentGames[i];
-			/*
-			 * System.out.println(i + "	|	" + game.getWinner() + "	|	" +
-			 * game.getPlayerOneMove() + "	|	" + game.getPlayerTwoMove() + "	|");
-			 */
-			System.out.format("%-15s%-15s%-15s%-15s\n", i + 1, game.getWinner() == null ? "No Winner" : getWinner(),
+			System.out.format(FORMATTED_STRING_WITH_LINE_BREAK, i + 1, game.getWinner() == null ? "No Winner" : getWinner(),
 					game.getPlayerOneMove(), game.getPlayerTwoMove());
 
 		}

@@ -1,5 +1,7 @@
 package com.rps.game.outcome;
 
+import java.util.Objects;
+
 public class GameOutcome {
 
 	public int getCode() {
@@ -22,6 +24,7 @@ public class GameOutcome {
 	public final static GameOutcome LOSE = new GameOutcome(1, "LOSE");
 	public final static GameOutcome DRAW = new GameOutcome(2, "DRAW");
 
+	@Override
 	public boolean equals(Object o) {
 		return (o instanceof GameOutcome) && (code == ((GameOutcome) o).code);
 	}
@@ -34,4 +37,8 @@ public class GameOutcome {
 		this.name = name;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(code, name);
+	}
 }

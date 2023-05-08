@@ -5,9 +5,9 @@ import com.rps.game.players.PlayerType;
 
 public class HumanComputerGame implements Game {
 
-	PlayerType winner;
-	GameItem humanMove;
-	GameItem computerMove;
+	transient PlayerType winner;
+	transient GameItem humanMove;
+	transient GameItem computerMove;
 	
 	public HumanComputerGame(PlayerType winner, GameItem humanMoveGameItem, GameItem computerMoveGameItem) {
 		this.winner = winner;

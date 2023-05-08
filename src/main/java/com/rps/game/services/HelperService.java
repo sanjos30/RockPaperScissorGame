@@ -11,6 +11,9 @@ import com.rps.game.moves.Scissor;
 import com.rps.game.outcome.GameOutcome;
 import com.rps.game.players.PlayerType;
 
+import static com.rps.game.constants.Constants.TWO;
+import static com.rps.game.constants.Constants.ZERO;
+
 public class HelperService {
 
 	private static final Random random = new Random();
@@ -42,9 +45,9 @@ public class HelperService {
 	 */
 	public PlayerType getWinner(GameOutcome humanPlayerGameOutcome) {
 
-		if (humanPlayerGameOutcome.getCode() == 0) {
+		if (humanPlayerGameOutcome.getCode() == ZERO) {
 			return  PlayerType.HUMAN;
-		} else if (humanPlayerGameOutcome.getCode() == 2) {
+		} else if (humanPlayerGameOutcome.getCode() == TWO) {
 			return null;
 		} else {
 			return PlayerType.COMPUTER;
