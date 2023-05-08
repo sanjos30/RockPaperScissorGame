@@ -65,6 +65,8 @@ OR
     >gradle run
 
 
+### Test Report
+This project uses jacocoTestReport plugin. After the build, the test summary report can be viewed from `build/jacocoHtml/index.html` file
 
 # HOW TO PLAY
 
