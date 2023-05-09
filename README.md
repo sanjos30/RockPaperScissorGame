@@ -88,3 +88,8 @@ The following questions are asked
 Test coverage
 
 ![Screenshot](resources/TestCoverage.png)
+
+
+# Todo's
+
+* Implement CICD and Git workflow
