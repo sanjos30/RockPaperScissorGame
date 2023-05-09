@@ -7,6 +7,9 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.rps.game.Game;
+import com.rps.game.HumanComputerGame;
+import com.rps.game.score.ScoreManager;
 import org.junit.Test;
 
 import com.rps.game.Tournament;
@@ -99,9 +102,19 @@ public class ScoreManagerTest {
 		System.setOut(new PrintStream(testBufferOutput));
 		scoreManager.displayTournamentScoreSummary();
 		final String standardOutput = testBufferOutput.toString();
-		System.out.println(standardOutput);
 		// verify the output has the heading
 		assertTrue(standardOutput.contains("TOURNAMENT SCORE SUMMARY"));
 
+	}
+
+	@Test
+	public void test_displayAllGamesScore(){
+		Game game = new HumanComputerGame(PlayerType.COMPUTER, TestConstants.rock, TestConstants.paper);
+		System.setOut(new PrintStream(testBufferOutput));
+		Game[] tournamentGames = new Game[]{game};
+		scoreManager.displayAllGamesScore(tournamentGames);
+		final String standardOutput = testBufferOutput.toString();
+		System.out.println(standardOutput);
+		//assertTrue(standardOutput.contains("TOURNAMENT SCORE SUMMARY"));
 	}
 }

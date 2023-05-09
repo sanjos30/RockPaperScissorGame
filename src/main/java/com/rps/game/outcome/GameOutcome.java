@@ -19,25 +19,9 @@ public class GameOutcome {
 		return code;
 	}
 
-	public void setCode(int code) {
-		this.code = code;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		return (o instanceof GameOutcome) && (code == ((GameOutcome) o).code);
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(code, name);
-	}
 }
