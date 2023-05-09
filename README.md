@@ -83,3 +83,8 @@ The following questions are asked
     >e.g WON: COMPUTER
 5. TOURNAMENT GAMES SCORE SECTION DISPLAYS THE RESULT AND MOVES OF ALL THE ATTEMPTS
 
+# Reference
+
+Test coverage
+
+![Screenshot](resources/TestCoverage.png)
